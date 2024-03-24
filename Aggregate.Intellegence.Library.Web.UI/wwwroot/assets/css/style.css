@@ -1231,3 +1231,9 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+.dataTables_scrollBody td {
+    max-width: 150px; /* Adjust as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

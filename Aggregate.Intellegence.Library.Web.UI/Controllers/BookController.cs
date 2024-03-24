@@ -21,6 +21,7 @@ namespace Aggregate.Intellegence.Library.Web.UI.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> FetchAllBooks()
+        
         {
             try
             {
