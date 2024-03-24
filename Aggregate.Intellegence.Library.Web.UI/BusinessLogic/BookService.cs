@@ -12,7 +12,7 @@ namespace Aggregate.Intellegence.Library.Web.UI.BusinessLogic
         public BookService()
         {
             httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://localhost:5110/");
+            httpClient.BaseAddress = new Uri("http://localhost:5110/api/");
             httpClient.DefaultRequestHeaders.Clear();
             httpClient.Timeout = TimeSpan.FromSeconds(60);
         }
@@ -47,12 +47,12 @@ namespace Aggregate.Intellegence.Library.Web.UI.BusinessLogic
         public async Task<List<Book>> GetAllABooks()
         {
             var booklist = new List<Book>();
-            var response = await httpClient.GetAsync("Book");
-            if(response.IsSuccessStatusCode)
+            var response = await httpClient.GetAsync("Book/GetAllBooks");
+            if (response.IsSuccessStatusCode)
             {
-                var content= await response.Content.ReadAsStringAsync();
-                var responseContent=JsonConvert.DeserializeObject<List<Book>>(content);
-                return response != null ? responseContent : booklist;
+                var content = await response.Content.ReadAsStringAsync();
+                var responseContent = JsonConvert.DeserializeObject<List<Book>>(content);
+                return responseContent != null ? responseContent : booklist;
             }
             return booklist;
 
