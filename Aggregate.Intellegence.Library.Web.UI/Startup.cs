@@ -1,4 +1,6 @@
-﻿using AspNetCoreHero.ToastNotification;
+﻿using Aggregate.Intellegence.Library.Web.UI.BusinessLogic;
+using Aggregate.Intellegence.Library.Web.UI.Interface;
+using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -23,8 +25,8 @@ namespace Aggregate.Intellegence.Library.Web.UI
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
+            services.AddScoped<IBookService, BookService>();
 
-           
 
             services.AddSession(options =>
             {
@@ -83,7 +85,7 @@ namespace Aggregate.Intellegence.Library.Web.UI
             {
                 endpoints.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Account}/{action=Login}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
