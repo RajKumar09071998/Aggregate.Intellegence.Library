@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aggregate.Intellegence.Library.Web.UI", "Aggregate.Intellegence.Library.Web.UI\Aggregate.Intellegence.Library.Web.UI.csproj", "{6AEF0457-FC19-430B-873C-075EFAA8913A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aggregate.Intellegence.Library.Web.UI", "Aggregate.Intellegence.Library.Web.UI\Aggregate.Intellegence.Library.Web.UI.csproj", "{6AEF0457-FC19-430B-873C-075EFAA8913A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aggregate.Intellegence.Library.Web.Service", "Aggregate.Intellegence.Library.Web.Service\Aggregate.Intellegence.Library.Web.Service.csproj", "{2DDB3F2C-8FBE-4141-A5C0-1E11F25B2FC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aggregate.Intellegence.Library.Web.Service", "Aggregate.Intellegence.Library.Web.Service\Aggregate.Intellegence.Library.Web.Service.csproj", "{2DDB3F2C-8FBE-4141-A5C0-1E11F25B2FC4}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Aggregate.Intellegence.Library.DB", "Aggregate.Intellegence.Library.DB\Aggregate.Intellegence.Library.DB.sqlproj", "{404F136A-5635-407A-9B9D-F95D1A56AB4A}"
 EndProject
