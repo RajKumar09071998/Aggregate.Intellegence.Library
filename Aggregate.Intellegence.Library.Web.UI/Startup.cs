@@ -26,6 +26,7 @@ namespace Aggregate.Intellegence.Library.Web.UI
 
             services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IRoleService, RoleService>();
 
 
             services.AddSession(options =>

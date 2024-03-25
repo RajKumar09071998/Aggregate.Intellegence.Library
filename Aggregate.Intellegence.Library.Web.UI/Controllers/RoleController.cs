@@ -1,16 +1,16 @@
 ﻿using Aggregate.Intellegence.Library.Web.UI.Interface;
 using Aggregate.Intellegence.Library.Web.UI.Model;
-using AspNetCoreHero.ToastNotification.Notyf;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aggregate.Intellegence.Library.Web.UI.Controllers
 {
-    public class RoleController1 : Controller
+    public class RoleController : Controller
     {
         private readonly IRoleService roleService;
-        private readonly NotyfService notyfService;
-        public RoleController1(IRoleService roleService,
-                               NotyfService notyfService)
+        private readonly INotyfService notyfService;
+        public RoleController(IRoleService roleService,
+                               INotyfService notyfService)
         {
             this.roleService = roleService;
             this.notyfService= notyfService;
@@ -33,7 +33,7 @@ namespace Aggregate.Intellegence.Library.Web.UI.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> InsertOrUpdateRole(Role role)
+        public async Task<IActionResult> InsertOrUpdateRole([FromBody]Role role)
         {
             try
             {
@@ -42,17 +42,31 @@ namespace Aggregate.Intellegence.Library.Web.UI.Controllers
                     var response = await roleService.InsertOrUpdateRole(role);
                     if (response)
                     {
-                        if (role.Id > 0)
+                        if (role.Id > 0 && role.IsActive==true)
                         {
                             notyfService.Success("Role Updated Successfully");
                         }
-                        notyfService.Success("Role Insertred Successfully");
-                        return Json(true);
+                        else if(role.Id > 0 && role.IsActive == false)
+                        {
+                            notyfService.Success("Role Deleted Successfully");
+                        }
+                        else
+                        {
+                            notyfService.Success("Role Inserted Successfully");
+                            return Json(true);
+                        }
                     }
+                    else
+                    {
+                        notyfService.Warning("Something went wrong");
+                        return Json(false);
+                    }
+                }
+                else
+                {
                     notyfService.Warning("Something went wrong");
                     return Json(false);
                 }
-                notyfService.Warning("Something went wrong");
                 return Json(false);
             }
             catch (Exception ex)

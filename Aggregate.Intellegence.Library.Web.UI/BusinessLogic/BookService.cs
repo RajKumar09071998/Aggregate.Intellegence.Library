@@ -62,7 +62,7 @@ namespace Aggregate.Intellegence.Library.Web.UI.BusinessLogic
         {
             var _book = JsonConvert.SerializeObject(book);
             var requestContent = new StringContent(_book, Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync("Book/InsertOrUpdateABook", requestContent);
+            var response = await httpClient.PostAsync("Book/InsertOrUpdateBook", requestContent);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();

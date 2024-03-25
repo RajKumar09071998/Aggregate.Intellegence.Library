@@ -34,7 +34,7 @@ namespace Aggregate.Intellegence.Library.Web.UI.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> InsertOrUpdateBook(Book book)
+        public async Task<IActionResult> InsertOrUpdateBook([FromBody]Book book)
         {
             try
             {
@@ -43,17 +43,32 @@ namespace Aggregate.Intellegence.Library.Web.UI.Controllers
                     var response = await bookServices.InsertOrUpdateABook(book);
                     if(response)
                     {
-                        if (book.BookId > 0)
+                        if (book.BookId > 0 && book.IsActive==true)
                         {
                             notyfService.Success("Book Updated Successfully");
                         }
-                        notyfService.Success("Book Insertred Successfully");
-                        return Json(true);
+                        else if(book.BookId > 0 && book.IsActive==false)
+                        {
+                            notyfService.Success("Book Deleted Successfully");
+                        }
+                        else
+                        {
+                            notyfService.Success("Book Inserted Successfully");
+                            return Json(true);
+                        }
                     }
+                    else
+                    {
+                        notyfService.Warning("Something went wrong");
+                        return Json(false);
+                    }
+                }
+                else
+                {
                     notyfService.Warning("Something went wrong");
                     return Json(false);
                 }
-                notyfService.Warning("Something went wrong");
+               
                 return Json(false);
             }
             catch (Exception ex)

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Books";
+    ViewData["Title"] = "Roles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
@@ -11,23 +11,18 @@
     <div class="card">
         <div class="card-header">
             <div class="col-md-8 float-left" style="text-align: right;float: right;">
-                <button id="addBook" class="btn btn-success">
+                <button id="addRole" class="btn btn-success">
                     <i class="fas fa-plus-circle"></i>
                 </button>
             </div>
         </div>
         <div class="card-body">
             <div class="table-responsive text-nowrap">
-                <table class="table table-striped table-bordered text-nowrap" style="width:100%" id="BooksGrid">
+                <table class="table table-striped table-bordered text-nowrap" style="width:100%" id="RolesGrid">
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Publisher</th>
-                            <th>PublishYear</th>
-                            <th>Genre</th>
-                            <th>Language</th>
-                            <th>PageCount</th>
+                            <th>Role</th>
+                            <th>Code</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -35,13 +30,13 @@
             </div>
         </div>
     </div>
-    <partial name="_addEditBookPartial.cshtml" />
+    <partial name="_addEditRole.cshtml" />
 </div>
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/js/BookController.js"></script>
+<script src="~/js/RoleController.js"></script>
 <script type="text/javascript">
     $(function () {
-        var ctrl = new BookController();
+        var ctrl = new RoleController();
         ctrl.init();
     });
 </script>

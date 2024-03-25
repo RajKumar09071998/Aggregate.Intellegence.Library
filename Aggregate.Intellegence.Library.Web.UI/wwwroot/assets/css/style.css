@@ -1237,3 +1237,11 @@ h6 {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.form-row {
+    display: inline-flex !important;
+    width: 100% !important;
+}
+
+.col-6 {
+    padding: 5px !important;
+}
