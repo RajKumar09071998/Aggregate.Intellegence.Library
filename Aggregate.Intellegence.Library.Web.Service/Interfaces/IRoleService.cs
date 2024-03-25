@@ -8,5 +8,6 @@ namespace Aggregate.Intellegence.Library.Web.Service.Interfaces
         Task<bool> DeleteRole(long roleId);
         Task<Role> GetRole(long roleId);
         Task<List<Role>> FetchAllRoles();
+        
     }
 }

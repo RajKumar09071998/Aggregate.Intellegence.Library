@@ -1,0 +1,60 @@
+﻿<form id="addEditBookForm">
+    <div class="modal fade" id="addEditBookModal" tabindex="-1" aria-labelledby="addEditBookModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" style="max-width: 60% !important;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEditBookModalLabel">Book Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="padding:10px !important">
+                    <input type="hidden" id="BookId" />
+                    <div class="form-row">
+                        <div class="col-6 mb-3">
+                            <label for="Title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="Title" name="Title" placeholder="Title..." autofocus required />
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="Author" class="form-label">Author</label>
+                            <input type="text" class="form-control" id="Author" name="Author" placeholder="Author..." autofocus required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-6 mb-3">
+                            <label for="Publisher" class="form-label">Publisher</label>
+                            <input type="text" class="form-control" id="Publisher" name="Publisher" placeholder="Publisher..." autofocus required />
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="PublishYear" class="form-label">Publish Year</label>
+                            <input type="text" class="form-control" id="PublishYear" name="PublishYear" placeholder="PublishYear..." autofocus required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-6 mb-3">
+                            <label for="Genre" class="form-label">Genre</label>
+                            <input type="text" class="form-control" id="Genre" name="Genre" />
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="Language" class="form-label">Language</label>
+                            <input type="text" class="form-control" id="Language" name="Language" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-6 mb-3">
+                            <label for="PageCount" class="form-label">PageCount</label>
+                            <input type="text" class="form-control" id="PageCount" name="PageCount" />
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="Description" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="Description" name="Description" placeholder="Description..." autofocus required />
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" id="SaveBook">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

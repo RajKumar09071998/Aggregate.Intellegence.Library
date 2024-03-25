@@ -11,7 +11,7 @@ namespace Aggregate.Intellegence.Library.Web.UI.BusinessLogic
         public RoleService()
         {
             httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://localhost:5110/");
+            httpClient.BaseAddress = new Uri("http://localhost:5110/api/");
             httpClient.DefaultRequestHeaders.Clear();
             httpClient.Timeout = TimeSpan.FromSeconds(60);
         }
@@ -33,7 +33,7 @@ namespace Aggregate.Intellegence.Library.Web.UI.BusinessLogic
         public async Task<List<Role>> FetchAllRoles()
         {
             var rolelist = new List<Role>();
-            var response = await httpClient.GetAsync("Role");
+            var response = await httpClient.GetAsync("Role/FetchAllRoles");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
