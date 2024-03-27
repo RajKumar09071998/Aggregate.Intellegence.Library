@@ -4,11 +4,13 @@ using Aggregate.Intellegence.Library.Web.Service.Models;
 using Aggregate.Intellegence.Library.Web.Service.Repository;
 using Aggregate.Intellegence.Library.Web.Service.Services;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using System.Net;
@@ -42,9 +44,9 @@ namespace Aggregate.Intellegence.Library.Web.Service
        sqlServerOptionsAction: sqlOptions =>
        {
            sqlOptions.EnableRetryOnFailure(
-               maxRetryCount: 5, 
-               maxRetryDelay: TimeSpan.FromSeconds(30), 
-               errorNumbersToAdd: null); 
+               maxRetryCount: 5,
+               maxRetryDelay: TimeSpan.FromSeconds(30),
+               errorNumbersToAdd: null);
        }));
             services.AddControllers().AddNewtonsoftJson(options =>
             {
@@ -52,6 +54,31 @@ namespace Aggregate.Intellegence.Library.Web.Service
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
             services.AddMvc().AddXmlSerializerFormatters();
+
+            var usedGenaratesTokenKey = _configuration.GetValue<string>("UsedGenaratesTokenKey");
+
+            services.AddScoped<IAuthenticateService>(x => new AuthenticateService
+            (x.GetRequiredService<ApplicationDBContext>(), usedGenaratesTokenKey));
+
+            var key = Encoding.ASCII.GetBytes(usedGenaratesTokenKey);
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+
+            });
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -76,7 +103,7 @@ namespace Aggregate.Intellegence.Library.Web.Service
         }
         public void Configure(IApplicationBuilder app)
         {
-            
+
             app.UseExceptionHandler(errorApp =>
             {
                 errorApp.Run(async context =>
@@ -88,7 +115,7 @@ namespace Aggregate.Intellegence.Library.Web.Service
                 });
             });
             app.UseRouting();
-           
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -97,15 +124,15 @@ namespace Aggregate.Intellegence.Library.Web.Service
                     await context.Response.WriteAsync("Hello World!");
                 });
             });
-           
+
 
             app.UseSwagger();
 
-           
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "AI Global API Services V1");
-                
+
             });
         }
     }

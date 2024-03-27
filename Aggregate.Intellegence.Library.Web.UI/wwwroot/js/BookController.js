@@ -42,6 +42,7 @@
         });
         $(document).on("click", "#addBook", function () {
             self.clearInputs();
+            $("#addEditBookModalLabel").text("Add Book");
             $("#addEditBookModal").modal("show");
         });
         $(document).on("click", ".edit-icon", function () {
@@ -158,6 +159,29 @@
                     console.error(error);
                 }
             })
+        })
+        $(document).on("click", ".download-icon", function () {
+            $(".se-pre-con").show();
+            var data = $(this);
+            var row = data.closest('tr');
+            var dataItem = booksGrid.row(row).data();
+
+            var pdf = new jspdf.jsPDF();
+
+            var logoImg = new Image();
+            logoImg.src = '../../assets/img/Aggregate_Inttelegence.png';
+            pdf.addImage(logoImg, 'PNG', 0, 0, 60, 50); // Adjust coordinates and dimensions
+            pdf.text('Date:' + new Date().toLocaleDateString(), 160, 15);
+            pdf.text('Place:Hyderabad', 160, 25)
+            pdf.text('Title: ' + dataItem.Title, 90, 60)
+            pdf.text('Author : ' + dataItem.Author, 80, 70);
+            pdf.text('Published By : ' + dataItem.Publisher, 65, 80);
+            pdf.text('Published In : ' + dataItem.PublishYear, 80, 90);
+            pdf.text(dataItem.Description, 15, 120).setFontSize(10);
+            pdf.text('aggregateintelligence.com', 8, 295);
+            pdf.text('info@aggregateintelligence.com', 153, 295);
+            pdf.rect(7, 5, pdf.internal.pageSize.width - 13, pdf.internal.pageSize.height - 10, 'S');
+            pdf.save('AI_Library'+new Date() + '.pdf');
         })
     }
     self.clearInputs = function () {

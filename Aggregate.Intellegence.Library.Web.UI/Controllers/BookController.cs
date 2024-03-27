@@ -1,10 +1,12 @@
 ﻿using Aggregate.Intellegence.Library.Web.UI.Interface;
 using Aggregate.Intellegence.Library.Web.UI.Model;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aggregate.Intellegence.Library.Web.UI.Controllers
 {
+    [Authorize]
     public class BookController : Controller
     {
         private readonly IBookService bookServices;

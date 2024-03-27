@@ -1,6 +1,7 @@
 ﻿using Aggregate.Intellegence.Library.Web.UI.Interface;
 using Aggregate.Intellegence.Library.Web.UI.Model;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aggregate.Intellegence.Library.Web.UI.Controllers
@@ -15,6 +16,7 @@ namespace Aggregate.Intellegence.Library.Web.UI.Controllers
             this.roleService = roleService;
             this.notyfService= notyfService;
         }
+        [Authorize]
         public IActionResult Index()
         {
             return View();
@@ -33,6 +35,7 @@ namespace Aggregate.Intellegence.Library.Web.UI.Controllers
             }
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> InsertOrUpdateRole([FromBody]Role role)
         {
             try
@@ -75,6 +78,7 @@ namespace Aggregate.Intellegence.Library.Web.UI.Controllers
             }
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetARole(long bookId)
         {
             try
@@ -89,6 +93,7 @@ namespace Aggregate.Intellegence.Library.Web.UI.Controllers
 
         }
         [HttpDelete]
+        [Authorize]
         public async Task<IActionResult> DeleteRole(long rolId)
         {
             try

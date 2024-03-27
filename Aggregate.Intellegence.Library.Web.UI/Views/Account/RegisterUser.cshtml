@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Register"] = "Login";
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
+}
+<div class="card " style="height:auto;width:100%">
+
+    <div class="card-body">
+
+        <div class="pt-4 pb-2">
+            <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+            <p class="text-center small">Enter your personal details to create account</p>
+        </div>
+
+        <form class="row g-3 needs-validation">
+            <input type="hidden" id="Id" />
+            <div class="form-row">
+                <div class="col-6 mb-3">
+                    <label for="fName" class="form-label">First name</label>
+                    <input type="text" class="form-control" id="fName" name="fName" placeholder="Enter the first name..." autofocus required />
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="lName" class="form-label">Last name</label>
+                    <input type="text" class="form-control" id="lName" name="lName" placeholder="Enter the last name..." autofocus required />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-6 mb-3">
+                    <label for="Role" class="form-label">Role</label>
+                    <select id="dropdownRole" class="form-control custom-select" autofocus required></select>
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="PhoneNo" class="form-label">Phone Number</label>
+                    <input type="text" name="phoneNo" class="form-control" id="phoneNo" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-6 mb-3">
+                    <label for="Email" class="form-label">Your Email</label>
+                    <input type="email" name="email" class="form-control" id="email" required>
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="Password" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" id="password" required>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                    <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
+
+                </div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary w-100" id="saveUser" type="submit">Create Account</button>
+            </div>
+            <div class="col-12">
+                <p class="small mb-0">Already have an account? <a href="@Url.Action("Login","Account",null)">Log in</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/AccountController.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var ctrl = new AccountController();
+        ctrl.init();
+    });
+</script>

@@ -1,4 +1,4 @@
-﻿namespace Aggregate.Intellegence.Library.Web.Service.Models
+﻿namespace Aggregate.Intellegence.Library.Web.UI.Model
 {
     public class RegisterUser
     {
