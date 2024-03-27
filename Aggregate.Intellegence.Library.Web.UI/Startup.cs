@@ -19,7 +19,7 @@ namespace Aggregate.Intellegence.Library.Web.UI
             services.AddMvc().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                
+
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
@@ -27,8 +27,9 @@ namespace Aggregate.Intellegence.Library.Web.UI
             services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IRoleService, RoleService>();
-
-
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthneticatioinService, AuthneticatioinService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -41,8 +42,8 @@ namespace Aggregate.Intellegence.Library.Web.UI
                 options.SlidingExpiration = true;
                 options.AccessDeniedPath = "/Forbidden/";
                 options.Cookie.Name = "allowCookies";
-                options.Cookie.IsEssential = true; 
-                options.Cookie.HttpOnly = true; 
+                options.Cookie.IsEssential = true;
+                options.Cookie.HttpOnly = true;
                 options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             });
@@ -51,9 +52,9 @@ namespace Aggregate.Intellegence.Library.Web.UI
 
 
         }
-        public void Configure(IApplicationBuilder app,IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
+
 
             if (env.IsDevelopment())
             {
@@ -68,7 +69,7 @@ namespace Aggregate.Intellegence.Library.Web.UI
             {
                 OnPrepareResponse = ctx =>
                 {
-                    
+
                     ctx.Context.Response.Headers["Cache-Control"] = "no-cache, no-store";
                     ctx.Context.Response.Headers["Pragma"] = "no-cache";
                     ctx.Context.Response.Headers["Expires"] = "-1";
@@ -86,10 +87,10 @@ namespace Aggregate.Intellegence.Library.Web.UI
             {
                 endpoints.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Book}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }
 
-    
+
 }

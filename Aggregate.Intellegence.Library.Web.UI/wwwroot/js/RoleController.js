@@ -35,6 +35,7 @@
         });
         $(document).on("click", "#addRole", function () {
             self.clearInputs();
+            $("#addEditRoleModalLabel").text("Add Role");
             $("#addEditRoleModal").modal("show");
         });
         $(document).on("click", ".edit-icon", function () {

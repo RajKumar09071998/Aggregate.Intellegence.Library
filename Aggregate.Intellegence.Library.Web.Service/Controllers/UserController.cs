@@ -16,24 +16,10 @@ namespace Aggregate.Intellegence.Library.Web.Service.Controllers
             this.userService = userService;
         }
 
-        [HttpPost]
-        [Route("RegisterUser")]
-        public async Task<IActionResult> RegisterUser(RegisterUser registerUser)
-        {
-
-            try
-            {
-                var response = await userService.RegisterUser(registerUser);
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        
         [HttpGet]
         [Route("{userId:long}")]
-        public async Task<IActionResult> GetUser(long userId)
+        public async Task<IActionResult> FetchUser(long userId)
         {
             try
             {
